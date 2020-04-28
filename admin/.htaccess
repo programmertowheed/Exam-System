@@ -1,0 +1,9 @@
+﻿<IfModule mod_rewrite.c>
+
+ RewriteEngine On
+ #RewriteCond %{HTTPS} !=on
+ #RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+ 
+ ErrorDocument 404 http://localhost/examsystem/admin/404.php
+
+</IfModule>
