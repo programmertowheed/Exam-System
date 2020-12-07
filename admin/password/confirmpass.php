@@ -23,11 +23,11 @@ if(!isset($_COOKIE['email'])){
 		$title = basename($title,".php");
 		switch ($title) {
 		case "confirmpass":
-				echo "<title>Password Reset | Attendance system</title>";
+				echo "<title>Password Reset | Exam system</title>";
 				break;
 			
 			default:
-				echo "<title>Attendance system</title>";
+				echo "<title>Exam system</title>";
 		}
 	 }else{
 		 

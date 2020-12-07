@@ -27,36 +27,36 @@
                       }elseif($newPassword != $conPassword){
                         echo "<span style='color:red;font-size:18px;    font-weight: bold;'>Confirm Password Doesn't Match!!</span>";
                       }else{
-                        $userId       = Session::get("userId");
-                        $employeid    = Session::get("employeid");
-                        $usereid      = md5(sha1($employeid));
+                        $userId       = Session::get("examuserId");
+                        $userEmail    = Session::get("examuseremail");
+                        $email        = md5(sha1($userEmail));
                         $oldPassword  = md5(sha1($oldPassword));
-                        $auth         = md5(sha1($oldPassword.$usereid));
+                        $auth         = md5(sha1($oldPassword.$email));
 
-                        $query = "SELECT * FROM tbl_user WHERE employeid='$employeid' && userPass='$oldPassword' && auth='$auth' ";
+                        $query = "SELECT * FROM tbl_user WHERE userEmail='$userEmail' && userPass='$oldPassword' && auth='$auth' ";
                         $result = $db->select($query);
                         if($result== true){
                           $userpass  = md5(sha1($conPassword));
-                          $auth      = md5(sha1($userpass.$usereid));
+                          $auth      = md5(sha1($userpass.$email));
                           
                           $uppass ="UPDATE tbl_user 
                               SET
                                 userPass        = '$userpass',
                                 auth            = '$auth'
-                                WHERE employeid = '$employeid' AND id = '$userId'
+                                WHERE userEmail = '$userEmail' AND id = '$userId'
                                 ";
                           $run = $db->update($uppass);
                           if($run== true){
-                            $query = "SELECT * FROM tbl_user WHERE employeid='$employeid' && userPass='$userpass' && auth='$auth' ";
+                            $query = "SELECT * FROM tbl_user WHERE userEmail='$userEmail' && userPass='$userpass' && auth='$auth' ";
                             $result = $db->select($query);
                             if($result != false){
                               $value = mysqli_fetch_array($result);
                               $row   = mysqli_num_rows($result);
                               if($row > 0){
-                                Session::set("login", true);
-                                Session::set("auth", $value['auth']);
-                                Session::set("employeid", $value['employeid']);
-                                Session::set("userId", $value['id']);
+                                Session::set("examuserlogin", true);
+                                Session::set("examuserauth", $value['auth']);
+                                Session::set("examuseremail", $value['userEmail']);
+                                Session::set("examuserId", $value['id']);
                                 echo "<span style='color:green;font-size:18px;    font-weight: bold;'>Your password has been successfully Changed!</span>";
                               }else{
                                 echo "<span style='color:red;font-size:18px;    font-weight: bold;'>Result not found!</span>";

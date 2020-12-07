@@ -26,11 +26,11 @@ if(isset($_COOKIE['email'])){
 		$title = basename($title,".php");
 		switch ($title) {
 		case "changerequest":
-				echo "<title>Password Reset | Attendance system</title>";
+				echo "<title>Password Reset | Exam system</title>";
 				break;
 			
 			default:
-				echo "<title>Attendance system</title>";
+				echo "<title>Exam system</title>";
 		}
 	 }else{
 		 
@@ -180,9 +180,9 @@ if(isset($_COOKIE['email'])){
 										$value = mysqli_fetch_array($result);
 										$row   = mysqli_num_rows($result);
 										if($row > 0){
-											Session::set("adminlogin", true);
-											Session::set("adminemail", $value['userEmail']);
-											Session::set("adminuserId", $value['id']);
+											Session::set("examadminlogin", true);
+											Session::set("examadminemail", $value['userEmail']);
+											Session::set("examadminuserId", $value['id']);
 											setcookie("email","",time()-(86400*7));
 											header("Location:../index.php");
 										}else{

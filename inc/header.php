@@ -36,7 +36,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Attendance system</title>
+  <title>Exam system</title>
 
   <!-- Favicon -->
   <link href="assets/img/favicon.png" rel="icon" type="image/png">

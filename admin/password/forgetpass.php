@@ -19,11 +19,11 @@
 		$title = basename($title,".php");
 		switch ($title) {
 		case "forgetpass":
-				echo "<title>Password Reset | Attendance system</title>";
+				echo "<title>Password Reset | Exam system</title>";
 				break;
 			
 			default:
-				echo "<title>Attendance system</title>";
+				echo "<title>Exam system</title>";
 		}
 	 }else{
 		 

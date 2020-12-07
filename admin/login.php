@@ -21,7 +21,7 @@
     <meta name="keywords" content="Entrepreneur,Web Developer, Programmer, Programmer Towheed, Bangladesh, Online Earning, Earn Money online, Bangla Video Tutorial">
     <meta name="author" content="Programmer Towheed">
 
-	<title>Login | Attendance system</title>
+	<title>Login | Exam system</title>
 	
 	<!-- Favicon -->
     <link href="./../assets/img/favicon.png" rel="icon" type="image/png">
@@ -146,9 +146,9 @@
 								$value = mysqli_fetch_array($result);
 								$row   = mysqli_num_rows($result);
 								if($row > 0){
-									Session::set("adminlogin", true);
-									Session::set("adminemail", $value['userEmail']);
-									Session::set("adminuserId", $value['id']);
+									Session::set("examadminlogin", true);
+									Session::set("examadminemail", $value['userEmail']);
+									Session::set("examadminuserId", $value['id']);
 									header("Location:index.php");
 								}else{
 									echo "<span style='color:red;font-size:18px'>Result not found!</span>";

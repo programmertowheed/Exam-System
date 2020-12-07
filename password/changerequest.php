@@ -180,10 +180,10 @@ if(!isset($_COOKIE['r_n_c_a'])){
 									$value = mysqli_fetch_array($result);
 									$row   = mysqli_num_rows($result);
 									if($row > 0){
-										Session::set("login", true);
-										Session::set("auth", $value['auth']);
-										Session::set("email", $value['userEmail']);
-										Session::set("userId", $value['id']);
+										Session::set("examuserlogin", true);
+										Session::set("examuserauth", $value['auth']);
+										Session::set("examuseremail", $value['userEmail']);
+										Session::set("examuserId", $value['id']);
 
 										setcookie("email","",time()-(86400*7));
 										header("Location:../index.php");

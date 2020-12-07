@@ -27,7 +27,7 @@
                       }elseif($newPassword != $conPassword){
                         echo "<span style='color:red;font-size:18px;    font-weight: bold;'>Confirm Password Doesn't Match!!</span>";
                       }else{
-                        $email        = Session::get("email");
+                        $email        = Session::get("examadminemail");
                         $useremail    = md5(sha1($email));
                         $oldPassword  = md5(sha1($oldPassword));
                         $auth         = md5(sha1($oldPassword.$useremail));
@@ -52,9 +52,9 @@
                               $value = mysqli_fetch_array($result);
                               $row   = mysqli_num_rows($result);
                               if($row > 0){
-                                Session::set("adminlogin", true);
-                                Session::set("adminemail", $value['userEmail']);
-                                Session::set("adminuserId", $value['id']);
+                                Session::set("examadminlogin", true);
+                                Session::set("examadminemail", $value['userEmail']);
+                                Session::set("examadminuserId", $value['id']);
                                 echo "<span style='color:green;font-size:18px;    font-weight: bold;'>Your password has been successfully Changed!</span>";
                               }else{
                                 echo "<span style='color:red;font-size:18px;    font-weight: bold;'>Result not found!</span>";

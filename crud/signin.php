@@ -34,10 +34,10 @@
         $value = mysqli_fetch_array($result);
         $row   = mysqli_num_rows($result);
         if($row > 0){
-          Session::set("login", true);
-          Session::set("auth", $value['auth']);
-          Session::set("email", $value['userEmail']);
-          Session::set("userId", $value['id']);
+          Session::set("examuserlogin", true);
+          Session::set("examuserauth", $value['auth']);
+          Session::set("examuseremail", $value['userEmail']);
+          Session::set("examuserId", $value['id']);
           echo "login";
         }else{
           echo "<span style='color:red;font-size:18px'>Result not found!</span>";

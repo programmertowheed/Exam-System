@@ -33,7 +33,7 @@
           <div class="row">
             <div class="col-lg-6">
 <?php
-  $id = Session::get("adminuserId");
+  $id = Session::get("examadminuserId");
   $query = "SELECT * FROM tbl_admin WHERE id ='$id'";
   $red = $db->select($query);
   while($res = mysqli_fetch_assoc($red)){

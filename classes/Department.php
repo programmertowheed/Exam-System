@@ -64,9 +64,9 @@ class Department extends Controller{
         $msg['error'] = "Feild must not be empty!!";
         return $msg;
     }else{    
-        $name = $this->getDepartmentByName($name);
+        $ifname = $this->getDepartmentByName($name);
         //$name = mysqli_fetch_assoc($name);
-        if($name){
+        if($ifname){
             $this->msg['error'] = "Department already exist!!";
             return $this->msg;
         }else{
@@ -89,7 +89,7 @@ class Department extends Controller{
 	}
 
 	public function updateDepartment($data){
-		$id                  = $this->fm->validation($data['id']);
+		    $id                  = $this->fm->validation($data['id']);
         $name                = $this->fm->validation($data['name']);
         $publication_status  = $this->fm->validation($data['publication_status']);
 
@@ -97,24 +97,41 @@ class Department extends Controller{
             //header("Location:../editdepartment.php?id=$id&err=Feild must not be empty!!");
             $msg['error'] = "Feild must not be empty!!";
             return $msg;
-        }else{    
-          $update ="UPDATE tbl_department 
-              SET
-              name               = '$name',
-              publication_status = '$publication_status'
-              WHERE id = '$id'
-              ";
-          $run = $this->db->update($update);
-          if($run== true){
-            //header("Location:../departmentlist.php?msg=Data updated successfully!!");
-            $msg['success'] = "Data updated successfully!!";
-            return $msg;
-          }else{
-            //header("Location:../departmentlist.php?err=Data not updated!!");
-            $msg['error'] = "Data not updated!!";
-            return $msg;
-          }
+        }else{   
+
+              $exquery = "SELECT * FROM tbl_department WHERE name='$name' ";
+              $exdepart = $this->db->select($exquery);
+              if($exdepart != false){
+                  while($res = mysqli_fetch_assoc($exdepart)){
+                      $exid  = $res['id'] ;
+                  }
+              }
+
+              if(isset($exid) && $exid != $id){
+                  $msg['error'] = "Department already exist!!";
+                  return $msg;
+              }else{  
+                  $update ="UPDATE tbl_department 
+                      SET
+                      name               = '$name',
+                      publication_status = '$publication_status'
+                      WHERE id = '$id'
+                      ";
+                  $run = $this->db->update($update);
+                  if($run== true){
+                    //header("Location:../departmentlist.php?msg=Data updated successfully!!");
+                    $msg['success'] = "Data updated successfully!!";
+                    return $msg;
+                  }else{
+                    //header("Location:../departmentlist.php?err=Data not updated!!");
+                    $msg['error'] = "Data not updated!!";
+                    return $msg;
+                  }
+              }
         }
 	}
+
+
+
 
 }

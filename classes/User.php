@@ -8,7 +8,7 @@ class User extends Controller{
 	public $msg = array();
 
 	function __construct(){
-		parent::__construct();
+		 parent::__construct();
 	}
 
 	public function getUser(){
@@ -56,7 +56,7 @@ class User extends Controller{
       }else{    
         $uemail = $this->getUserByEmail($email);
         if($uemail){
-            $this->msg['error'] = "User already exist!!";
+            $this->msg['error'] = "Email already exist!!";
             return $this->msg;
         }else{
           $userEmail = md5(sha1($email));
@@ -92,12 +92,24 @@ class User extends Controller{
           //header("Location:../editauthor.php?id=$id&err=Feild must not be empty!!");
           $msg['error'] = "Feild must not be empty!!";
           return $msg;
-      }else{    
+      }else{ 
+        $uemail = $this->getUserByEmail($email);
+
+        if($uemail){
+            while($res = mysqli_fetch_assoc($uemail)){
+                $exid  = $res['id'] ;
+            }
+        }
+
+        if(isset($exid) && $id != $exid){
+            $this->msg['error'] = "Email already exist!!";
+            return $this->msg;
+        }else{   
           $update ="UPDATE tbl_user 
               SET
               username           = '$username',
               mobile             = '$mobile',
-              userEmail              = '$email',
+              userEmail          = '$email',
               publication_status = '$publication_status'
               WHERE id = '$id'
               ";
@@ -111,6 +123,7 @@ class User extends Controller{
             $msg['error'] = "Data not updated!!";
             return $msg;
           }
+        }
       }
 	}
 

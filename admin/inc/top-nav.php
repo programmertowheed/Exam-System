@@ -12,7 +12,7 @@
       <!-- Nav Item - Alerts -->
       <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
  <?php
-    $id = Session::get("adminuserId");
+    $id = Session::get("examadminuserId");
     $userquery = "SELECT * FROM tbl_admin WHERE id ='$id'";
     $userred = $db->select($userquery);
     while($userres = mysqli_fetch_assoc($userred)){
